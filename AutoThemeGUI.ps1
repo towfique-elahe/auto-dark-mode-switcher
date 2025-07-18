@@ -1,3 +1,7 @@
+# AutoThemeGUI.ps1
+# Version
+$LocalVersion = "1.0.0"
+
 try {
     Add-Type -AssemblyName System.Windows.Forms
     Add-Type -AssemblyName System.Drawing
@@ -7,9 +11,10 @@ try {
     exit
 }
 
+# === GUI SETUP ===
 $form = New-Object System.Windows.Forms.Form
 $form.Text = "Auto Dark Mode Switcher"
-$form.Size = New-Object System.Drawing.Size(400, 300)
+$form.Size = New-Object System.Drawing.Size(400, 330)
 $form.StartPosition = "CenterScreen"
 
 $labelLocation = New-Object System.Windows.Forms.Label
@@ -29,6 +34,12 @@ $labelSunset.Text = "Sunset: ..."
 $labelSunset.AutoSize = $true
 $labelSunset.Location = New-Object System.Drawing.Point(20, 80)
 $form.Controls.Add($labelSunset)
+
+$labelVersion = New-Object System.Windows.Forms.Label
+$labelVersion.Text = "Version: $LocalVersion"
+$labelVersion.AutoSize = $true
+$labelVersion.Location = New-Object System.Drawing.Point(20, 280)
+$form.Controls.Add($labelVersion)
 
 $btnLight = New-Object System.Windows.Forms.Button
 $btnLight.Text = "Set Light Mode"
@@ -66,6 +77,27 @@ $btnUninstall.Add_Click({
 })
 $form.Controls.Add($btnUninstall)
 
+# === VERSION CHECK ===
+function Check-ForUpdate {
+    try {
+        $remoteUrl = "https://raw.githubusercontent.com/towfique-elahe/auto-dark-mode-switcher/main/version.txt"
+        $remoteVersion = Invoke-RestMethod -Uri $remoteUrl -UseBasicParsing
+        if ($remoteVersion -ne $LocalVersion) {
+            $resp = [System.Windows.Forms.MessageBox]::Show(
+                "A new version ($remoteVersion) is available!`nDo you want to open the release page?",
+                "Update Available",
+                [System.Windows.Forms.MessageBoxButtons]::YesNo
+            )
+            if ($resp -eq [System.Windows.Forms.DialogResult]::Yes) {
+                Start-Process "https://github.com/towfique-elahe/auto-dark-mode-switcher/releases/latest"
+            }
+        }
+    } catch {
+        Write-Host "Update check failed: $_"
+    }
+}
+
+# === THEME SWITCH FUNCTION ===
 function Set-ThemeMode {
     param([string]$Mode)
 
@@ -114,6 +146,7 @@ public class NativeMethods {
     }
 }
 
+# === INSTALL SCHEDULER ===
 function Install-Scheduler {
     try {
         # Get location
@@ -188,6 +221,7 @@ $result = [uintptr]::Zero
     }
 }
 
+# === UNINSTALL SCHEDULER ===
 function Uninstall-Scheduler {
     try {
         Unregister-ScheduledTask -TaskName "AutoLightTheme" -Confirm:$false -ErrorAction SilentlyContinue
@@ -204,7 +238,7 @@ function Uninstall-Scheduler {
     }
 }
 
-# === Location Fetch
+# === INITIAL LOCATION & SUN DATA ===
 try {
     $loc = Invoke-RestMethod -Uri "http://ip-api.com/json"
     $lat = $loc.lat
@@ -223,7 +257,10 @@ try {
     $labelSunset.Text = "Sunset: N/A"
 }
 
-# === Show GUI ===
+# === Show GUI & Check for Updates ===
 $form.Topmost = $true
-$form.Add_Shown({ $form.Activate() })
+$form.Add_Shown({ 
+    $form.Activate()
+    Check-ForUpdate
+})
 [void]$form.ShowDialog()
