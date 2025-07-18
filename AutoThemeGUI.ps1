@@ -1,6 +1,6 @@
 # AutoThemeGUI.ps1
 # Version
-$LocalVersion = "1.0.0"
+$LocalVersion = "1.0.1"
 
 try {
     Add-Type -AssemblyName System.Windows.Forms

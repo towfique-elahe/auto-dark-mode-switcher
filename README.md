@@ -1,6 +1,6 @@
 # 🌗 Auto Dark Mode Switcher for Windows
 
-**Version**: `v1.0.0`  
+**Version**: `v1.0.1`  
 A lightweight PowerShell GUI tool that automatically transitions between **Light Mode** and **Dark Mode** based on **local sunrise and sunset** times — featuring auto location detection, clean theme switching (no Explorer restart), and scheduler integration via Windows Task Scheduler.
 
 ---
@@ -22,43 +22,44 @@ A lightweight PowerShell GUI tool that automatically transitions between **Light
 
 > Replace with actual screenshots when ready
 
-| App Interface | Theme Activated |
-|---------------|------------------|
+| App Interface                                                        | Theme Activated                                                                   |
+| -------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | ![GUI preview](https://via.placeholder.com/320x200.png?text=App+GUI) | ![Example light/dark](https://via.placeholder.com/320x200.png?text=Theme+Changed) |
 
 ---
 
 ## ⚙️ Requirements
 
-| Requirement      | Description                                  |
-|------------------|----------------------------------------------|
-| Windows Version   | Windows 10 or 11                             |
-| PowerShell        | v5.1 or newer (installed by default)        |
-| Internet Access   | Required for location and sunrise/sunset data |
-| Admin Rights      | Only required when installing scheduled tasks |
+| Requirement     | Description                                   |
+| --------------- | --------------------------------------------- |
+| Windows Version | Windows 10 or 11                              |
+| PowerShell      | v5.1 or newer (installed by default)          |
+| Internet Access | Required for location and sunrise/sunset data |
+| Admin Rights    | Only required when installing scheduled tasks |
 
 ---
 
 ## 🚀 Getting Started
 
 ### 1. Clone the Repository or Download ZIP
+
 ```bash
 git clone https://github.com/towfique-elahe/auto-dark-mode-switcher.git
-````
+```
 
 Or use the **Download ZIP** option on GitHub.
 
 ### 2. Launch the Application
 
-* **Double-click** `RunAutoTheme.bat`
+- **Double-click** `RunAutoTheme.bat`
   —or—
-* **Right-click** `AutoThemeGUI.ps1` → **Run with PowerShell**
+- **Right-click** `AutoThemeGUI.ps1` → **Run with PowerShell**
 
 ### 3. Use the Interface
 
-* ✅ Click **Set Light Mode** / **Set Dark Mode** to transfer manually
-* ⚙️ Click **Install Auto Switch** to set up scheduled switching
-* ❌ Click **Uninstall Auto Switch** to remove automation and cleanup files
+- ✅ Click **Set Light Mode** / **Set Dark Mode** to transfer manually
+- ⚙️ Click **Install Auto Switch** to set up scheduled switching
+- ❌ Click **Uninstall Auto Switch** to remove automation and cleanup files
 
 ---
 
@@ -70,8 +71,9 @@ When you click **Install Auto Switch**:
 2. Retrieves today's sunrise/sunset time (via `sunrise-sunset.org`)
 3. Creates two scheduled tasks:
 
-   * **AutoLightTheme**: runs daily at sunrise
-   * **AutoDarkTheme**: runs daily at sunset
+   - **AutoLightTheme**: runs daily at sunrise
+   - **AutoDarkTheme**: runs daily at sunset
+
 4. Immediately applies the correct theme upon setup
 5. Runs quietly in the background without user interaction
 
@@ -81,9 +83,9 @@ When you click **Install Auto Switch**:
 
 Click the **Uninstall Auto Switch** button to:
 
-* Delete both scheduled tasks
-* Remove the helper script (`Set-Theme.ps1`)
-* Leave your current theme untouched
+- Delete both scheduled tasks
+- Remove the helper script (`Set-Theme.ps1`)
+- Leave your current theme untouched
 
 ---
 
@@ -91,8 +93,8 @@ Click the **Uninstall Auto Switch** button to:
 
 An update checker is built into the interface for future releases. When enabled:
 
-* It queries your GitHub repo for the latest version
-* Prompts you to download and update automatically (or via browser link)
+- It queries your GitHub repo for the latest version
+- Prompts you to download and update automatically (or via browser link)
 
 > Coming in **v1.x.x**
 
@@ -124,7 +126,7 @@ Feel free to fork, submit issues, request features, or contribute improvements.
 
 ## 📞 Contact or Contribute
 
-* GitHub: [towfique-elahe/auto-dark-mode-switcher](https://github.com/towfique-elahe/auto-dark-mode-switcher)
-* Issues: [Open a new issue](https://github.com/towfique-elahe/auto-dark-mode-switcher/issues)
+- GitHub: [towfique-elahe/auto-dark-mode-switcher](https://github.com/towfique-elahe/auto-dark-mode-switcher)
+- Issues: [Open a new issue](https://github.com/towfique-elahe/auto-dark-mode-switcher/issues)
 
 > Keep your desktop in sync with the sun — effortlessly!
